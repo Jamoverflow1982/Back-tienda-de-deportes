@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:8080") // Permitir solicitudes desde el frontend
 @RestController
 @RequestMapping("/api/usuarios") // Ruta base para los usuarios
 
@@ -55,22 +56,21 @@ public class UsuarioController {
     }
     
     @GetMapping("/email/{email}")
-    public ResponseEntity<Usuarios> obtenerUsuarioPorEmail(@PathVariable String email) {
-        return usuarioService.obtenerUsuarioPorEmail(email)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<List<Usuarios>> obtenerUsuarioPorEmail(@PathVariable String email) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarioPorEmail(email);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarios);
     }
 
     @GetMapping("/username/{username}")
-    public ResponseEntity<Usuarios> obtenerUsuarioPorUsername(@PathVariable String username) {
-        return usuarioService.obtenerUsuarioPorUsername(username)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/admin/{admin}")
-    public List<Usuarios> listarUsuariosPorAdmin(@PathVariable boolean admin) {
-        return usuarioService.listarUsuariosPorAdmin(admin);
+    public ResponseEntity<List<Usuarios>> obtenerUsuarioPorUsername(@PathVariable String username) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarioPorUsername(username);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarios);
     }
 
     @GetMapping("/username/search/{username}")

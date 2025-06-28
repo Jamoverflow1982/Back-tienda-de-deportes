@@ -8,9 +8,8 @@ public interface UsuarioService {
 
     List<Usuarios> listarUsuarios();
     Optional<Usuarios> obtenerUsuarioPorId(Long id);
-    Optional<Usuarios> obtenerUsuarioPorEmail(String email);
-    Optional<Usuarios> obtenerUsuarioPorUsername(String username);
-    List<Usuarios> listarUsuariosPorAdmin(boolean admin);
+    List<Usuarios> obtenerUsuarioPorEmail(String email);
+    List<Usuarios> obtenerUsuarioPorUsername(String username);
     List<Usuarios> listarUsuariosPorUsername(String username);
     Usuarios guardarUsuario(Usuarios usuario);
     Usuarios actualizarUsuario(Long id, Usuarios usuario);

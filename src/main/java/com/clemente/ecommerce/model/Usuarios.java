@@ -14,16 +14,14 @@ public class Usuarios {
     private String email;
     private String username;
     private String password;
-    private boolean admin = false;
 
 
 
     public Usuarios() {}
-    public Usuarios(Long id, String email, String password, boolean admin, String username) {
+    public Usuarios(Long id, String email, String password, String username) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.admin = admin;
         this.username = username;
     }
     public Long getId() {
@@ -50,10 +48,5 @@ public class Usuarios {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isAdmin() {
-        return admin;
-    }
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
+    
 }
