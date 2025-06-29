@@ -73,9 +73,13 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
-    @GetMapping("/username/search/{username}")
-    public List<Usuarios> listarUsuariosPorUsername(@PathVariable String username) {
-        return usuarioService.listarUsuariosPorUsername(username);
+    @GetMapping("/admin/{admin}")
+    public ResponseEntity<List<Usuarios>> obtenerUsuarioPorAdmin(@PathVariable boolean admin) {
+        List<Usuarios> usuarios = usuarioService.obtenerUsuarioPorAdmin(admin);
+        if(usuarios.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarios);
     }
 
     @DeleteMapping("/email/{email}")
@@ -96,4 +100,12 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/admin/{admin}")
+    public ResponseEntity<Void> eliminarUsuarioPorUsername(@PathVariable boolean admin) {
+        if (usuarioService.obtenerUsuarioPorAdmin(admin).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        usuarioService.eliminarUsuarioPorAdmin(admin);
+        return ResponseEntity.noContent().build();
+    }
 }

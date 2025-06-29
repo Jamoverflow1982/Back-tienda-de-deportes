@@ -34,8 +34,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findByUsername(username);
     }
     @Override
-    public List<Usuarios> listarUsuariosPorUsername(String username) {
-        return usuarioRepository.findByUsername(username);
+    public List<Usuarios> obtenerUsuarioPorAdmin(boolean admin) {
+        return usuarioRepository.findByAdmin(admin);
     }
     @Override
     public Usuarios guardarUsuario(Usuarios usuario) {
@@ -57,5 +57,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void eliminarUsuarioPorUsername(String username) {
         usuarioRepository.deleteByUsername(username);
     }
-
+    @Override
+    public void eliminarUsuarioPorAdmin(boolean admin) {
+        usuarioRepository.deleteByAdmin(admin);
+    }
 }
