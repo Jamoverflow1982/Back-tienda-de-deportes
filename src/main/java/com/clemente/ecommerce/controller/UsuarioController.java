@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080") // Permitir solicitudes desde el frontend
+@CrossOrigin
 @RestController
 @RequestMapping("/api/usuarios") // Ruta base para los usuarios
 
@@ -35,6 +35,11 @@ public class UsuarioController {
 
     @PostMapping
     public Usuarios crearUsuario(@RequestBody Usuarios usuario) {
+        for (Usuarios existingUser : usuarioService.listarUsuarios()) {
+            if (existingUser.getEmail().equals(usuario.getEmail())) {
+                throw new IllegalArgumentException("Ya existe un usuario con el email proporcionado: " + usuario.getEmail());
+            }
+        }
         return usuarioService.guardarUsuario(usuario);
     }
 
