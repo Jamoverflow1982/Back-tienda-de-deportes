@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController // Expone métodos como API REST
 @RequestMapping("/api/articulos") // Ruta base
 public class ArticuloController {

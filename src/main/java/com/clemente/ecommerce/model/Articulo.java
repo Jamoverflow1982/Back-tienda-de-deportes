@@ -19,6 +19,14 @@ public class Articulo {
     private String categoria;
     private boolean disponible;
 
+    // Relación Muchos a Uno: Muchos Articulos pueden pertenecer a un solo Pedido
+    // @ManyToOne indica que múltiples instancias de Articulo están asociadas con una instancia de Pedido.
+    // @JoinColumn especifica la columna de clave foránea en la tabla 'articulos' que se unirá a la clave primaria de 'pedidos'.
+    // El nombre de la columna 'pedido_id' es una convención común.
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
+    private Pedidos pedido;
+
     public Articulo() {}
 
     public Articulo(Long id, String nombre, Double precio, String descripcion, String imagen, int cantidad, String categoria, boolean disponible) {
@@ -55,4 +63,8 @@ public class Articulo {
     
     public boolean isDisponible() { return disponible; }
     public void setDisponible(boolean disponible) { this.disponible = disponible; }
+
+    // Relación con la tabla "pedidos" Getters y Setters
+    public Pedidos getPedido() { return pedido; }
+    public void setPedido(Pedidos pedido) { this.pedido = pedido; }
 }
